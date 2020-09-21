@@ -1,20 +1,28 @@
-import React from 'react';
+import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
 
 import Message from './components/Message';
 
-function App() {
+class App extends Component<any>{
+  componentWillMount(){
+    console.log('Almost there');
+  }
 
+  componentDidMount(){
+    console.log('Finally...hello!');
+  }
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Message message='This is a simple message'/>
-      </header>
-    </div>
-  );
+  render(){
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <Message message='This is a simple message'/>
+        </header>
+      </div>
+    );
+  }
 }
 
 export default App;
