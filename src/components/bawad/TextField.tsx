@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {  useRef } from 'react';
 
 interface Person {
     firstName: string;
@@ -11,36 +11,27 @@ interface Props {
     someNumber?: number;
     fn?: (name: string)=> string;
     person: Person;
+    handleChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    handleSubmit?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
-interface TextNode {
-    text: string;
-}
-
-const TextField: React.FC<Props> = ({ text, person })=>{
+const TextField: React.FC<Props> = ({ text, person, handleChange, handleSubmit })=>{
     const {firstName, lastName} = person
 
-    // useState Hook
-    // // A number
-    // const [count, setCount] = useState(5);
-    // setCount(5)
-
-    // // Multiple types
-    // const [count, setCount] = useState<number | null | undefined>(5);
-    // setCount(null)
-
-    // // Object
-    // const [count, setCount] = useState<{text: string}>({ text: 'hello' });
-    // setCount({text})
-
-    // // Interface
-    // const [count, setCount] = useState<TextNode>({ text: 'hello' });
-    // setCount({text})
+    // useRef
+    const inputRef = useRef<HTMLInputElement>(null);
+    const divRef = useRef<HTMLDivElement>(null);
+    
 
     return(
-        <div>
+        <div ref={divRef}>
             <label>{firstName}, {lastName}</label>
-            <input placeholder={`${text}`}/>
+            <input placeholder={`${text}`} ref={inputRef} onChange={handleChange}/>
+            <button
+                onClick={handleSubmit}
+            >
+                Click Me!!
+            </button>
         </div>
     );
 };
